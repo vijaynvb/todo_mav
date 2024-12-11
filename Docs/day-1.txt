@@ -1,0 +1,73 @@
+
+What is an Apllication?
+    solves a user specific problem using computer program. Solution for a given problem 
+
+Program and Process is?
+    1. program: Set of instructions for CPU -> static file .C, .Java
+    2. process: execution of program -> CPU's -> when it is loaded into MM [Ram] and your processor is executing it 
+
+Enterprice Application? 
+    it's a combination application which are solving a business problem - Banking Domain -> [credit and debit transction]
+        1. web portal [staff, users] -> MVC, API+React, JSP, 
+        2. mobile app -> native, React Native, MAUI, Cordova
+        3. ATM's -> Desktop - Applets, .net winforms 
+        4. Backend Jobs -> shell scripts, cron jobs, Spring Batch 
+
+What is Microservices? 
+    microservices is a architectural pattern to develop EA
+
+    architect -> tools -> CNCF
+
+    Amazon.com -> 99.9 Uptime -> Deployment stratergy -> Blue Green Deployement -> Canray Deployment
+        1000 services -> repo's -> executable -> delopy in infra 
+        1 minunte -> upgrade or downgrade ->  11 services 
+        TodoApi -> v1 -> v2 
+
+    flipcart.com e-commerce
+
+Whats the architecture of MS? 
+ms principles 
+    1. Modularity -> Modules -> MS in our infra 
+    2. Hide Implementation -> MS -> any technoloy 
+    3. Automation -> CI/CD Tools
+    4. Scalable -> 99.9% uptime 
+        1. veritical 
+        2. horizontal 
+    5. Uniform Resource identification -> Http URL mechanisum 
+    6. Standrd Communitation Channel -> rest api's 
+
+CNCF - Consotium 
+
+1. Containerization of application MS -> App .jar + OS ubuntu
+    1. dockers, alternative
+2. Where to store your application -> Image -> Reigistry -> Docker hub, GCR  
+    docker hub, gcr 
+3. where to deploy the application -> 
+    1. static infra -> 
+        1. laptop -> docker desktop -> deploy the app 
+        2. GCP -> VM static -> deploy your image/ container 
+        3. GCP -> GKE -> Cluster Static -> deploy your application
+    2. Dynamic infra -> qa -> test 
+        Cloud Can provide VM's on a Button click -> deploy the app
+            1. teraform 
+            2. ansible
+            3. cheff puppet
+
+
+sudo docker run -it ubuntu
+    VM 1                                                Vm2
+    todoapp -> 47 mb                                   todoapp -> 47 mb                                          
+    vm - window os -11 -> vdi - 10 gb -> 100 gb        vm - ubuntu -> vdi - 10 gb -> 100                               
+    vcpu - 4                                           vcpu - 4 
+    vio - 100 gb                                       vio - 100 gb     
+    vn/w - 100 mbps                                    vn/w - 100 mbps          
+    vram - 8 gb                                        vram - 8 gb 
+    
+    - shared resource 
+    - dedicated resource
+
+    Host Os - Windows -10 -> 20gb
+    cpu - 16
+    io - 1tb
+    n/w - 1000 mbps 
+    ram - 32 gb
