@@ -20,7 +20,11 @@ Docker Commands:
         $ docker images 
         $ docker pull alpine
         $ docker images
-        $ docker run -it busybox 
+        $ docker run -d busybox sleep 500
+        $ docker run -it busybox
+            # uname -n
+            # uname -a 
+            # exit
         $ docker ps 
         $ docker ps -a
 
