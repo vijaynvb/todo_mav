@@ -27,6 +27,16 @@ Docker Commands:
             # exit
         $ docker ps 
         $ docker ps -a
+        $ docker rm a 2 c
+        $ docker rm -f <continaer id>
+        $ docker images 
+        $ docker run -it alpine 
+            # curl 
+            # apk add curl 
+            # curl 
+        $ docker ps -a
+        $ docker commit 08831ddae94f alpinecurl:1.0
+        $ docker images 
 
     Declarative Commands:
 
