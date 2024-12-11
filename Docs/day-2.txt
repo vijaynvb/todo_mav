@@ -34,10 +34,43 @@ Docker Commands:
             # curl 
             # apk add curl 
             # curl 
+            # exit
         $ docker ps -a
-        $ docker commit 08831ddae94f alpinecurl:1.0
+        $ docker commit <Container-Id> alpinecurl:1.0
         $ docker images 
+
+        push images to centralize repo:
+
+        $ docker tag alpinecurl:1.0 <username>/alpinecurl:1.0
+        $ docker images 
+        $ docker push <username>/alpinecurl:1.0
+        Access denied
+        $ docker login 
+            username:
+            password:
+        $ docker push <username>/alpinecurl:1.0
+       
+        $ docker pull vijaynvb/myalpinecurl:20.0
+
+        container life cycle:
+
+        $ docker stop <Container-Id>
+        $ docker start <Container-Id>
+        $ docker restart <Container-Id>
+        $ docker pause <Container-Id>
+        $ docker unpause <Container-Id>
+
+        Container connect:
+        $ docker exec -it <container-id> sh
+
+
 
     Declarative Commands:
 
+
+alpine -> linux os -> limited numbers of programs shell ping ls browser
+
+installed curl - container 
+
+todoalpineapp image -> linux os alpine programs shell ping ls + curl + todo.jar
 
