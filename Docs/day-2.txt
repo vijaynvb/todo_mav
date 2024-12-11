@@ -1,10 +1,29 @@
 
 alias: 
     $ vim ~/.bashrc
-    i
-    alias d='sudo docker'
-    esc :wq
+        i
+            alias d='sudo docker'
+        esc :wq
     $ source ~/.bashrc
     $ d ps 
 
+Confirm Lab is Working for every one:?
+
 Docker Commands: 
+    $ docker --version
+    $ docker info
+        client 
+        server 
+ 
+    Imperative Commands:
+        $ docker ps
+        $ docker images 
+        $ docker pull alpine
+        $ docker images
+        $ docker run -it busybox 
+        $ docker ps 
+        $ docker ps -a
+
+    Declarative Commands:
+
+
