@@ -1,0 +1,100 @@
+1. MS 
+    1. each service container 
+    2. each container participate in EA
+
+Todays Topics:
+    1. Docker Network 
+    2. Docker Volumes 
+    3. How to create a app embeeded in a container 
+
+Network's: 
+    Client/Server Architecture:
+
+    client system -> request -> server responds -> response -> client
+
+    web [http,https]:
+    ftp:
+    email [smtp]:
+        Client program -> browser -> ftp client -> outlook client
+            1. make a request 
+            2. recive a response
+        server program -> apache tomcat -> ftp server -> outlook server
+            1. [Listening] Accept the request from client 
+            2. Provide a response
+
+MS Container [server] -> Listening -> task -> server programs -> web server -> tomcat 
+
+ISO OSI Layers :- server -> Listening -> portnumber 8080
+
+1. Application [http [80,443, 8080], smtp[25], ftp[21]]
+2. presentation - ignore
+3. session - ignore
+4. transport -> [Header-Port Number: Data 0,1,0,1 ....]
+        1. is configure to work with OS -> with a predefined Port Number's 
+5. Network [Header- IP address, IP V4] : IP, ARP, ICMP
+            1. identify the system for which the packet is sent?
+            Loopback address : 127.0.0.1 - 127.256.256.256 -> localhost DNS
+            Network ip/ private ip : 176.0.0.0, 192.0.0.0 -> subnet 
+            static ip/ public ip : 10.0.0.0 -> visible in internet -> ISP -> Internet Service Provider -> Jio, Airtel
+6. Datalink -> create frames of data [Header: Data 0,1,0,1 ....]
+7. Physical -> 0,1 -> Network Interface Card 
+                1. -> rj45, wifi, coaxial cable connectivity, fibe optic
+                2. MAC ID -> 48 bit unique id 
+
+
+- In A given system how many IP address can be assigned?
+    Ans: n ip address
+
+URL: 
+scheme://ip:portno/pathtoresource/resource/pathvariable?queryparams
+http://localhost:8080/api/v1/employees/{id=1}?search:vijay
+
+
+what is a Network and SubNet
+
+                    abc org 
+                        | WAN -> Public IP's 2
+          ----------------------------
+          | 20.0.1.1                  |              
+        india  public ip             US  us public ip 10.12.2.1
+         100 L  NAT                  100 L
+                [Network Address Translation]  10.12.2.1 -> use subnet ip in the other network 172.0.2.20 -> headers
+    sub net                        us subnet 
+    172.0.1.0-256                  172.168.2.0
+    CIDR -                     CIDR - Classless Inter Domain Routing          
+    Network:Host               Network:Host     
+    172.0.1 : 1-100                172.0.2 : 1-100
+    private Ip's
+
+    vijay: 172.0.1.10            joe: 172.0.2.20
+
+    http://172.0.2.20:80/
+
+
+
+Windows -> 
+    Ip Network 
+    docker network -
+
+        subnet for dockers -> virutal network 
+        1. contianer 1 - 172.17.0.2, 172.19.0.2
+        2. container 2 - 172.17.0.3, 172.19.0.3
+
+  $ docker images
+  $ docker run --name=C1 -d alpine sleep 500
+  $ docker run --name=C2 -d alpine sleep 500
+  $ docker ps -a
+
+
+create a network and asign subnet for containers:
+
+    $ docker network ls
+    $ docker network create maveric-c-net
+    $ docker network ls
+    $ docker inspect maveric-c-net
+    $ docker run --name=C1 --network=maveric-c-net -d alpine sleep 500
+    $ docker run --name=C2 --network=maveric-c-net -d alpine sleep 500
+    $ docker inspect <contianer-id>
+    $ docker ps -a 
+    $ docker inspect <contianer-id>
+    $ docker inspect maveric-c-net
