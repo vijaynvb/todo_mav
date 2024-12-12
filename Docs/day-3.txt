@@ -98,3 +98,27 @@ create a network and asign subnet for containers:
     $ docker ps -a 
     $ docker inspect <contianer-id>
     $ docker inspect maveric-c-net
+
+
+Volumes: 
+
+Host System [mac, ubuntu]   Container System            
+    io  1tb ssd             vio - 100 mb sdd -> tempvol -> readme.txt   
+    cpu                     vcpu        
+    network                 vnetwork            
+    ram                     vram   
+
+volume [vol]
+readme.txt
+
+    $  docker volume create vol
+    $  docker volume ls 
+    $  docker inspect vol
+    $  docker run -d --name=c1 -v vol:/tempvol  alpine sleep 500
+    $  docker ps -a
+    $  docker exec -it <Container-id> sh
+    $  docker ps -a
+    $  docker rm -f <Container-id>
+    $  docker ps -a
+    $  docker run -d --name=c1 -v vol:/tempvol  alpine sleep 500
+    $  docker exec -it <Container-id> sh
