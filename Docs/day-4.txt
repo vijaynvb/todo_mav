@@ -26,4 +26,26 @@ Macos -> Docker CRE -> Container[Todoappmvr]
 
 browser -> macos [8081] -> container[Todoappmvr] [8081]
 
-$ docker run -d -p 8081:8081 todoappmvr
+$ docker run -d -p 8081:8081 todoappmvr 
+
+
+Service Discovery -> Eureka Service Discovery, K8s out of the box 
+    Scalling -> 
+        1. vertical scalling -> increase the resource of existing instance for what?
+        2. horizontal scalling -> creating new instaces of same image
+            instance 1: 300
+            instance 2: 300
+            HAS -> Horizontanl Automatic Scallings -> rule
+                1. need to have 2 instance at any time 
+                2. if the avg cpu utilization is more than 80% create new instance
+                3. not go beyond 10 instances 
+                4. if the avg cpu utilization is 20% delete one instance 
+
+    performance: 
+        becnhmark: 32 core cpu, 1000tb ssd, 128 gb ram, 100 mbps n/w -> 3000 concurent users can be served 
+
+Docker-Compose:
+
+docker run -d -p 4306:3306 --network=todoapi -e MYSQL_ROOT_PASSWORD=P@ssw0rd -e MYSQL_DATABASE=tododb --name=mysqldb mysql
+
+docker run -d -p 9096:8081 --network=todoapi -e MYSQL_HOST=mysqldb -e MYSQL_PORT=4306 vijaynvb/todoapimvr:1.0
