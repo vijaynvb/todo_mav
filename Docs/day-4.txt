@@ -1,0 +1,21 @@
+Today's Topic
+1. Docker File
+2. Deploying application in Dockers and Accessing Application outside host
+3. Theory/Demo - Service Discovery and Gateway Configuration
+4. Basics - Docker-Compose for Multi-Container Applications
+5. Assignment 1: Deploying the Bookinfo Application Using Docker
+
+CLI commands: Docker 
+    1. Imperative:
+        docker commit <Container-Id> alpinecurl:1.0
+    2. Declarative 
+        use a file to decribe how to create a image -> Dockerfile
+
+        $ ls
+            dockerfile
+        $ docker build -t todoappmvr:2.0 .
+        $ docker images
+        $ docker run todoappmvr:2.0
+
+to run jar:
+    1. JRE -> openjdk:11-jre

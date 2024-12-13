@@ -122,3 +122,7 @@ readme.txt
     $  docker ps -a
     $  docker run -d --name=c1 -v vol:/tempvol  alpine sleep 500
     $  docker exec -it <Container-id> sh
+
+
+
+Todoapp Rest API [service, container] -> MySQL DB [container]
