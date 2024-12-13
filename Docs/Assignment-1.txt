@@ -1,0 +1,11 @@
+Assignment:
+
+1. Create a simple spring boot aplication 
+2. bundle into a docker image 
+3. expose and delpoy it on docker runtime engine 
+
+expected delivery: word document.
+    1. Folder structure of the project - image 
+    2. application.properties file
+    3. dockerfile
+    4. commands for creating the above topics  
