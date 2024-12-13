@@ -32,7 +32,7 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8081
 
 # Specify the command to run the Spring Boot app when the container starts
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
 
 
 # #with existing jar file 

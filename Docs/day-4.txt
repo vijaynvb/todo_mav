@@ -19,3 +19,11 @@ CLI commands: Docker
 
 to run jar:
     1. JRE -> openjdk:11-jre
+
+Port Forwarding: to access from host system
+
+Macos -> Docker CRE -> Container[Todoappmvr]
+
+browser -> macos [8081] -> container[Todoappmvr] [8081]
+
+$ docker run -d -p 8081:8081 todoappmvr
