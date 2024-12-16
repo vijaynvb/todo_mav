@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  todo-app:
+    image: 'vijaynvb/todoapimvr:1.0'
+    restart: always
+    container_name: todo-app
+    ports:
+        - "8096:8081"
+    environment:
+        - MYSQL_HOST=mysqldb
+        - MYSQL_PORT=3306
+    depends_on:
+        - mysqldb 
+    networks:
+      - todoapi
+        
+           
+  mysqldb:
+    image: mysql:latest
+    restart: always
+    container_name: mysqldb
+    environment:
+        - MYSQL_ROOT_PASSWORD=P@ssw0rd
+        - MYSQL_DATABASE=tododb
+    ports:
+        - "3307:3306"
+    networks:
+      - todoapi
+
+networks:
+  todoapi:
+    driver: bridge
