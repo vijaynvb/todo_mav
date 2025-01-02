@@ -6,5 +6,51 @@
 2. Deployment tool -> Docker Compose
 
     $ sudo apt-get install docker-compose
+    $ nano docker-compose.yaml
+        Paste docker compose content 
+        Ctrl x, y enter
+    $ ls
     $ sudo docker-compose up
     $ sudo docker-compose down
+
+ports 
+                 -> Host                    -> Container - 100 - horizonatal scaling
+Windows [0-1024] -> wsl ubuntu [0-1024] 8086 -> todoapi [ubuntu os][0-1024] 8081 -> transport layer -> OS -> 
+browser -> 172.x.x.50:8096 -> 8081 -> application
+        -> localhost:8096
+
+1. single point of failure 
+2. scaling to multiple replicas is a challenge 
+3. disaster management is very difficult
+    observability and monitoring mechnaisum to manage application + infra 
+
+Orcastration Tools -> 
+    1. Cloud Providers Has it by default -> GCP 
+    2. K8s -> K8s
+    3. kata
+
+K8s -> Cluster
+        | OS1 [cpu, ram, io, network]  -> 
+   Host | OS2 [cpu, ram, io, network] -> todoapi container -> pod
+   nodes| OS3 [cpu, ram, io, network] -> mysql -> service discovey and load balancer - out of the box k8s has these features 
+        | OS4 [cpu, ram, io, network] -> pod 1 [name, ip ]
+
+k8s -> App Pod -> give me 3 instance of todoapi 
+    1. pod 1 -> todoapi contianer -> istio service mesh container [observability containers]
+    2. pod 2 -> todoapi contianer
+    3. pod 3 -> todoapi contianer
+
+Db Pods -> 
+    4. pod 1 Mysql Container 
+
+Architectural Style of Implementation: 
+    1. One Master also a Node same system -> Docker desktop -> k8s service -> k8sadmin
+    2. one master and one node two systems -> minikube, microk8s, kubeadm
+    3. one master with n nodes n systems  -> minikube, microk8s, kubeadm
+    4. integrated master with n nodes -> cloud providers [GKE, EKS, AKS service] -> multiple vm's as node 
+    5. two masters with n nodes 
+    6. n master with n nodes 
+
+  master tainting -> tainted -> cannot be node 
+                      untained -> can be node also 
+

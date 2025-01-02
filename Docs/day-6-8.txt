@@ -1,0 +1,45 @@
+
+1. minikube - kubectl -> Cluster -> Combination of Nodes -> multiple VM[Laptops]
+    1. Ubuntu VM - Master - Node 1
+        1 Pod - Application -> Vijaynvb/todoappmav:1.0, nginx
+ 
+        K8s starting using Minikube 
+
+        $ sudo minikube start --driver=docker --force 
+            k8s cluster -> CRE -> --driver=docker --force 
+        $ sudo minikube status 
+            k8s cluster status - Master is running 
+
+        $kubectl get nodes 
+            kubectl -> client -> k8s master -> minikube deamon process 
+            master and node are running in the same system 
+
+        $ sudo minikube stop 
+        $ sudo minikube start --driver=docker --force --nodes 2 -p multinode 
+           Ubuntu VM 
+            VM 1. master + node 1
+            VM 2. node 2 
+
+Rest API Server: 
+    list all the resources 
+        kubectl api-resources 
+    http://ip:800/api/v1/nodes 
+        C post -> json data 
+            kubectl create resource [yaml file -> json] -> hello pod - throw an error
+            kubectl apply resource if pod dosent exitst it will create if it exists the applies the configuration
+            kubectl apply -f simplepod.yaml
+        R
+            Kubectl get resources
+        U 
+            kubectl edit resource object 
+            kubectl edit pods hello1
+        D 
+            kubectl delete resource object 
+            kubectl delete pods hello1 
+
+Kubectl create -f simplepod.yaml 
+
+
+1. Multinode setup of minikube 
+2. Kubectl commands basics 
+    k8s client [rest api] -> rest api -> k8s master [minikube] -> manage nodes[1 or more] 
