@@ -1,0 +1,251 @@
+Commands:
+    kubectl delete pod --all
+
+    kubectl get all
+
+Pods 
+    kubectl get pods -o wide
+
+    nano pod.yaml
+
+    kubectl apply -f pod.yaml 
+
+    kubectl get pods -o wide
+
+    kubectl describe pods
+
+
+Replica set:
+
+    nano rs-example.yaml
+
+    kubectl apply -f rs-example.yaml
+
+    kubectl get pods -o wide
+
+    kubectl scale replicaset rs-example --replicas=5
+
+    kubectl get pods -o wide
+
+    kubectl scale rs rs-example --replicas=3
+
+    kubectl describe rs rs-example
+
+    kubectl delete rs rs-example
+
+Deployment:
+
+    nano deployment-example.yaml
+
+    kubectl apply -f deployment-example.yaml
+
+    kubectl get deployments
+
+    kubectl get rs --show-labels
+
+    kubectl describe rs deploy-example-<pod-template-hash>
+
+    * scale
+    kubectl scale deploy deploy-example --replicas=5
+
+    *Roll back Deployment
+    kubectl rollout history deployment deploy-example
+
+    kubectl get pods --show-labels
+
+    * add new labels
+    kubectl edit deploy deploy-example --record
+
+    kubectl rollout history deployment deploy-example
+
+    *view specific version changes
+    kubectl rollout history deployment deploy-example --revision=1
+
+    *Undo of deploy
+    kubectl rollout undo deployment deploy-example --to-revision=1
+
+    kubectl delete deploy deploy-example
+
+Jobs
+
+    nano job-example.yaml
+
+    kubectl apply -f job-example.yaml
+
+    kubectl get pods --show-labels --watch
+
+    kubectl describe job job-example
+
+    kubectl delete job job-example
+
+Corn job
+
+    nano cronjob-example.yaml
+
+    kubectl apply -f cronjob-example.yaml
+
+    kubectl get cronjob
+
+    kubectl describe CronJob cronjob-example
+
+    kubectl get pods
+
+    kubectl delete CronJob cronjob-example
+
+Networking [Services]
+
+network c2c:
+    kubectl apply -f multi-container-example.yaml
+    
+    watch -n 2 kubectl get pods
+
+    kubectl exec -ti multi-container-example -c content sh
+
+    apk add curl
+
+    curl 127.0.0.1
+    wget http://127.0.0.1/index.html
+
+network p2p:
+
+    nano alpine.yaml
+
+    kubectl apply -f alpine.yaml
+
+    kubectl describe pod multi-container-example
+
+    kubectl exec -ti alpine sh
+
+    apk add curl
+
+    curl <pod multi-container-example ipaddress>
+
+network service:
+
+    *create one more multicontainer pod in total 2 app=nginx labeled pods
+
+    kubectl get pods --show-labels
+
+    nano service-clusterip.yaml
+
+    kubectl apply -f service-clusterip.yaml
+
+    kubectl describe service clusterip
+
+    kubectl label pod multi-container-example2 app=nginx1 --overwrite
+
+    kubectl describe service clusterip
+
+    *login to any pod and make a service dns call
+    * POD need not belong to service
+    kubectl exec -it alpine sh
+
+    *use service name
+    curl clusterip.default.svc.cluster.local
+
+network service Nodeport:
+
+    nano service-nodeport.yaml
+
+    kubectl apply -f service-nodeport.yaml
+
+    kubectl describe service nodeport
+
+    kubectl get pods -o wide --show-labels
+
+    *Node port will expose the pod to nodes 
+    *so you can access from browser from outside cluster
+
+    kubectl exec -it alpine sh
+
+    #curl nodeport.default.svc.cluster.local
+
+Configmaps
+
+    nano configmap.yaml 
+
+    kubectl apply -f configmap.yaml
+
+    kubectl get configmap special-config
+    kubectl describe configmap special-config
+
+    nano configmap_pod.yaml
+
+    kubectl apply -f configmap_pod.yaml
+
+    kubectl exec -it config-test-pod /bin/sh
+
+    echo $SPECIAL_LEVEL_KEY
+
+    echo $LOG_LEVEL
+
+    kubectl delete -f configmap_pod.yaml configmap.yaml
+
+Secrets
+
+    echo -n 'my-app' | base64
+    echo -n 'P@ssw0rd' | base64
+
+    nano secrets.yaml
+
+    kubectl create -f secrets.yaml
+    kubectl get secret mysecret
+    kubectl describe secret mysecret
+
+    nano secrets_pod.yaml
+
+    kubectl apply -f secrets_pod.yaml secrets.yaml
+
+    kubectl exec -it secret-test-pod /bin/bash
+
+    echo $SECRET_USERNAME
+
+    echo $SECRET_PASSWORD
+
+    kubectl delete -f secrets_pod.yaml
+
+
+Volume:
+
+    nano volume-example.yaml
+
+    kubectl apply -f volume-example.yaml
+
+    kubectl exec volume-example -c content -- /bin/sh -c "cat /html/index.html"
+
+    kubectl exec volume-example -c nginx -- /bin/sh -c "cat /usr/share/nginx/html/index.html"
+
+    kubectl delete pods volume-example
+
+
+Persistant Volume:
+
+    nano html_volume.yaml
+
+    nano deploy_write_reader.yaml
+
+    kubectl describe svc Service
+
+    kubectl exec reader-<pod-hash>-<pod-id> -- /bin/sh -c "echo nginx >> /usr/share/nginx/html/index.html"
+
+    hostpath - writer and reader are in same node it will work,
+
+Statefull set
+    
+    nano sts-example.yaml
+
+    kubectl apply -f sts-example.yaml
+
+    kubectl get sts
+
+    kubectl get pods --show-labels
+
+    kubectl delete pod sts-example-<sts-template-hash>
+
+    kubectl get pods --show-labels
+
+    kubectl exec -it alpine sh
+        / apk add curl
+        / curl sts-example-0.app.default.svc.cluster.local
+
+    kubectl delete -f sts-example.yaml

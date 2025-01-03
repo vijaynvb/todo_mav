@@ -43,3 +43,12 @@ Kubectl create -f simplepod.yaml
 1. Multinode setup of minikube 
 2. Kubectl commands basics 
     k8s client [rest api] -> rest api -> k8s master [minikube] -> manage nodes[1 or more] 
+
+1. replicaset 
+2. Deployment 
+3. statefulllset
+4. Configmaps & Secrets 
+5. PV and PVC 
+6. Storage class 
+
+7. Networking in K8s -> pod - 2 - pod,  
