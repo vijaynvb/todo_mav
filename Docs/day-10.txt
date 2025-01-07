@@ -1,0 +1,8 @@
+GCP Instance Commands: after connecting to the instance 
+
+ $ apt update 
+ $ apt install apache2
+ $ ls /var/www/html
+ $ cat /var/www/html/index.html
+ $ echo "hello vijay" > /var/www/html/index.html
+ $ cat /var/www/html/index.html

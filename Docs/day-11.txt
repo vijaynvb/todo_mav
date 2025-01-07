@@ -1,0 +1,48 @@
+GCloud CLI Commands 
+
+$ gcloud --version
+$ gcloud config list
+$ gcloud init
+$ gcloud config list
+$ gcloud config configurations list
+$ gcloud config configurations activate <Name of the config>
+
+Imperative Commands 
+    kubectl create namespace --name=dev-environemnt 
+    gcloud compute instances create my-instance --machine-type=e2-micro 
+Declarative Commands - CI/CD tools like jenkins, githubactions, 
+    namespace.yaml
+        apiversion: v1
+        kind: namespace
+        metadata:
+            name: dev-environemnt
+    Kubectl create -f namespace.yaml
+
+    myinstance.yaml 
+        .....
+    gcloud 
+
+
+    1. add role [Service account use] to your user account which u have logedin  in IAM 
+    2. gcloud compute instances create my-instance --machine-type=e2-micro
+
+
+Container
+Orcastrate the containers
+    1. k8s deploying applications 
+    2. GCP services for deploying Applications 
+        1. IAAS Compute engine 
+        2. App Engine - deployed directly gcloud app deploy
+        3. functions
+        4. run 
+        5. GKE -> Cloud 
+        6. storage 
+        7. bigdata
+
+Music Orcastra - 
+    oracstrator -> instruments
+    infra manger -> containers or other services 
+        1. manage how many instancese HS 
+        2. self healing 
+        3. selective deployment -> region 
+        4. manage the trafic 
