@@ -2,7 +2,16 @@
 2. Cloud Function 
 3. Cloud Run 
 
-Container
+IAM [Identity and Access Management] & Admin -> Admin Related Activity 
+
+    1. GCP Console -> Web UI interface -> Crentials Login [User Name]
+        user -> credentials -> GCP Services 
+    2. Remote System -> GCP Service -> Service Account -> user or to ssh session 
+        system -> login using ssh -> service account -> gcp services
+
+
+Container - 
+SCM Access -
 Orcastrate the containers
     1. k8s deploying applications 
     2. GCP services for deploying Applications 
@@ -21,3 +30,5 @@ Music Orcastra -
         2. self healing 
         3. selective deployment -> region 
         4. manage the trafic 
+            todoapp v1 - 50%
+            todoapp v2 - 50%
