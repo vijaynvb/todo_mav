@@ -1,0 +1,23 @@
+1. Cloud App Engine 
+2. Cloud Function 
+3. Cloud Run 
+
+Container
+Orcastrate the containers
+    1. k8s deploying applications 
+    2. GCP services for deploying Applications 
+        1. IAAS Compute engine 
+        2. App Engine - deployed directly gcloud app deploy
+        3. functions
+        4. run 
+        5. GKE -> Cloud 
+        6. storage 
+        7. bigdata
+
+Music Orcastra - 
+    oracstrator -> instruments
+    infra manger -> containers or other services 
+        1. manage how many instancese HS 
+        2. self healing 
+        3. selective deployment -> region 
+        4. manage the trafic 
