@@ -1,0 +1,42 @@
+
+1. Compute Engine -> VM -> Client
+    1. GCloud 
+    2. Git
+    3. Kubectl 
+    4. etc...
+
+2. GCP Services: -> Services/Server
+    1. GCP Console 
+    2. App Engine 
+    3. Functions 
+    4. Run 
+    5. GKE 
+    6. Storage 
+    7. Etc...
+
+Gcloud init
+
+[compute]
+region = us-central1
+zone = us-central1-c
+[core]
+account = mvaric-serviceaccount@mavericsy-1732863913796.iam.gserviceaccount.com
+disable_usage_reporting = True
+project = mavericsy-1732863913796
+
+Your active configuration is: [default]
+
+
+$  gcloud init
+$  gcloud config list 
+$  git clone https://github.com/vijaynvb/todo_mav.git
+$  ls
+$  cd todo_mav/
+$  ls
+$  gcloud app deploy
+
+service account role -> cloud build editor
+
+url for the log  
+https://mavericsy-1732863913796.uc.r.appspot.com/swagger-ui.html
+
