@@ -40,3 +40,52 @@ service account role -> cloud build editor
 url for the log  
 https://mavericsy-1732863913796.uc.r.appspot.com/swagger-ui.html
 
+
+APP Engine - Google -> java ->  PAAS -
+infra manger -> containers or other services 
+    1. manage how many instancese HS 
+        1. multiple instances in different zones
+    2. self healing 
+    3. selective deployment -> region 
+    4. manage the trafic 
+        todoapp v1 - 50%
+        todoapp v2 - 50%
+
+App Engine - 
+    1. Mavericsys-172XXXXXXXX
+        Todo Application 
+            1. todo service 
+                1. V1 - todos
+                    1. Instance 1
+                    2. instance 2
+                2. V2 - todos + hello endpoints
+                    1. instance 11
+            2. user service
+                1. V1
+
+
+Commands: App Engine 
+
+$ cd todo_mav/
+$ cd src/main/java/com/company/todoapp/controllers/
+$ ls
+$ nano HelloController.java 
+    uncomment the rest controller in the controller
+$ gcloud app services list
+$ gcloud app versions list
+$ cd ../../../../../../../
+$ ls
+$ gcloud app deploy --version=v2
+$ gcloud app versions list
+$ gcloud app services set-traffic --splits=<Old-Versionid-from-previous-command>=1
+    monitor the application output in browser
+$ gcloud app services set-traffic --splits=<new-Versionid-from-previous-command>=1
+    monitor the application output in browser
+$ gcloud app deploy --version=v3 --no-promote
+$ cd ..
+$ git clone https://github.com/vijaynvb/user_mav.git
+$ ls
+$ cd user_mav/
+$ ls
+$ nano app.yaml 
+$ gcloud app deploy 
