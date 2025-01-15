@@ -51,7 +51,7 @@ infra manger -> containers or other services
         todoapp v1 - 50%
         todoapp v2 - 50%
 
-App Engine - 
+App Engine - GCP Service - Oracastration feature inbuilt
     1. Mavericsys-172XXXXXXXX
         Todo Application 
             1. todo service 
@@ -62,7 +62,6 @@ App Engine -
                     1. instance 11
             2. user service
                 1. V1
-
 
 Commands: App Engine 
 
