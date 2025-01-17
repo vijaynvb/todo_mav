@@ -1,0 +1,43 @@
+GCP
+    knative - inhouse[GCP Propriety took] orcastration tool -> cloud 
+    Data center -> on prem infra -> Anthos 
+
+CNCF
+    k8s -> OS orcastration tool
+    Cloud -> GKE, AKS, EKS
+    onprem -> kubeadm, minikube, microk8s, docker desktop k8s.
+
+Ingress
+            Cloud Infra 
+            Todo Application
+                EndPoints
+                http://gcpurl/todos
+Client -> Cloud Infra -> ingress 
+Browser ->  Cloud run -> ingress communication
+
+Egress
+            Cloud Infra 
+            Todo Application
+                EndPoints
+                Controller      ->   Outlook - MS - Todoapplication -> rest api's
+Egress -> cloud run -> MS Outlook Todo app as rest api 
+
+            Cloud Infra[Application]
+Client -> Application
+    Ingress 
+    inbound reqeust 
+    northbound
+
+          Application -> thrid party server
+              Egress 
+              Outbound 
+              Southbound 
+
+GCP - Storage 
+    1. Block -> Drive 
+    2. File -> file 
+    3. object -> store data with metadata
+        upload - http 
+                Multipart upload -> client -> chunks upload -> PL -> libraries 
+
+                GSUTIL -> CLI Client for Cloud Storage 

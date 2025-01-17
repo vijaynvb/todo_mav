@@ -1,0 +1,24 @@
+
+
+Google K8s Engine. [GKE] - Cluster -> Authentication and Autorization [IAM ]
+    1. Master - Google -> KubeConfig
+        1. Kube API -> 
+        2. ETCD DB
+        3. Controller
+        4. Scheduler
+        5. Kube Proxy
+    2. Nodes - N Nodes -> VM -> Compute Engine
+        1. Container Runtime Engine 
+        2. Kubelet 
+
+Compute Engine -> 
+    1. Kubectl - KubeConfig 
+
+Enterprice Application
+    1. Todo Application 
+        1. TodoAPI
+        2. UserAPI 
+        3. Mysql
+
+
+gcloud container clusters get-credentials my-cluster --zone us-central1-a --project mavericsy-1732863913796

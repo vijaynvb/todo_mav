@@ -1,0 +1,20 @@
+
+GKE Cluster:
+
+k8s Networking:
+    1. C2C -> Pod Ip adderres or localhost
+    2. P2P -> Cluster wide pod ip
+    3. pod-service -> pods [1-n pods]
+    4. External -> service [ip addr] -> pods [application] -> load balancers
+
+Ingress and Egress 
+    Ingress inbound communication from outside of cluster  
+    Egress outbound communication to outside of cluster
+
+Observability and Monitoring 
+    Enable the monitoring and logging features for a cluster and view all the reports 
+    Prometheus - Log aggregator -> standard way of logging 
+    Grafana - 
+
+    Alerts -> permissions not there to access the alerts 
+
