@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-auto-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-auto-deployment
+  template:
+    metadata:
+      labels:
+        app: my-auto-deployment
+    spec:
+      containers:
+      - name: my-container
+        image: registry.k8s.io/ubuntu-slim:0.1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 50Mi
+          limits:
+            cpu: 200m
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do timeout 0.3s yes >/dev/null; sleep 0.3s; done"]
