@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: dest-app
+  name: dest-app
+  namespace: ns-source
+spec:
+  containers:
+  - image: nginx
+    name: dest-app
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
