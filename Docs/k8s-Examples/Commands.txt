@@ -249,3 +249,58 @@ Statefull set
         / curl sts-example-0.app.default.svc.cluster.local
 
     kubectl delete -f sts-example.yaml
+
+GKE - HPA 
+Reference Link: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+
+
+    kubectl get pods -A
+        Look for these pods which should be running:
+        1. gke-metrics-agent-*****
+        2. metrics-server-v1.30.3-*********-*****
+    kubectl apply -f https://k8s.io/examples/application/php-apache.yaml
+    kubectl top pods
+    kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+    kubectl get hpa
+    
+    # Run this in a separate terminal
+    # so that the load generation continues and you can carry on with the rest of the steps
+    kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+
+    kubectl get hpa php-apache --watch
+    kubectl get pods 
+    kubectl delete -f https://k8s.io/examples/application/php-apache.yaml 
+
+
+GKE - VPA
+Reference Link: https://cloud.google.com/kubernetes-engine/docs/concepts/verticalpodautoscaler
+
+    cat deploy.yaml
+    kubectl apply -f deploy.yaml
+    kubectl get deployments.apps
+    cat vpa.yaml
+    kubectl apply -f vpa.yaml 
+    kubectl get vpa 
+    kubectl get vpa my-vpa -o yaml 
+
+GKE - Resource Quota NS 
+
+    kubectl create ns rq 
+    kubectl apply -f resource-quota.yaml 
+    kubectl describe ns rq
+    kubectl apply -f deploy-nginx.yaml 
+    kubectl get pods -n rq 
+    kubectl describe ns rq 
+    kubectl scale deploy -n rq deploy-nginx --replicas 4
+    kubectl get pods -n rq 
+    kubectl describe ns rq 
+    kubectl get rs -n rq 
+    kubectl describe rs -n rq deploy-nginx-********
+    nano deploy-nginx.yaml 
+        modify cpu limit to 400
+    kubectl replace --force -f deploy-nginx.yaml 
+    kubectl get pods -n rq
+    kubectl describe rs -n rq deploy-nginx-********
+    kubectl describe ns rq 
+
+GKE - Limit Range -> Pod or Container or Volume

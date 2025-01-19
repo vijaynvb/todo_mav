@@ -1,0 +1,15 @@
+apiVersion: v1 
+kind: ResourceQuota 
+metadata:
+  name: rq-quota 
+  namespace: rq
+spec:
+  hard:
+    cpu: "500m" 
+    memory: 1Gi 
+    pods: "3"
+  #scopeSelector:
+  #  matchExpressions: 
+  #    - operator: In 
+  #      scopeName: PriorityClass
+  #      values: ["high"]
