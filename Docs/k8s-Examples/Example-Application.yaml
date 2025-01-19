@@ -1,0 +1,156 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: todoapp-prod
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dbconfig
+  namespace: todoapp
+data:
+  MYSQL_HOST: svctododb.todoapp.svc.cluster.local 
+  MYSQL_USER: root 
+  MYSQL_PASSWORD: P@ssword
+  MYSQL_DATABASE: tododb
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: svctododb
+  namespace: todoapp
+spec:
+  type: ClusterIP
+  selector:
+    app: mysqldb
+  ports:
+  - port: 3306
+    targetPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svctodoapp
+  namespace: todoapp
+spec:
+  type: LoadBalancer
+  selector:
+    app: todoapi
+  ports:
+  - port: 80
+    targetPort: 80
+--- 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mydbpv
+  namespace: todoapp
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: slow
+  hostPath:
+    path: /tmp/mysql
+    type: DirectoryOrCreate
+
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mydbpvc
+  namespace: todoapp
+spec:
+  storageClassName: slow
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldb
+  namespace: todoapp
+spec:
+  selector:
+    matchLabels:
+      app: mysqldb
+  template:
+    metadata:
+      labels:
+        app: mysqldb
+    spec:
+      nodeSelector:
+        gpu: nvidia
+      containers:
+      - name: mysqldb
+        image: mysql
+        ports:
+        - containerPort: 3306
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: dbconfig
+                key: MYSQL_PASSWORD
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: dbconfig
+                key: MYSQL_DATABASE
+        volumeMounts:
+        - name: dbpath
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: dbpath
+        persistentVolumeClaim:
+          claimName: mydbpvc
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapp
+  namespace: todoapp
+spec:
+  selector:
+    matchLabels:
+      app: todoapi
+  template:
+    metadata:
+      labels:
+        app: todoapi
+    spec:
+      nodeSelector:
+        gpu: nvidia
+      containers:
+      - name: todoapi
+        image: vijaynvb/todoapimysql:1.0
+        ports:
+        - containerPort: 80
+        env:
+          - name: MYSQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: dbconfig
+                key: MYSQL_HOST
+          - name: MYSQL_USER
+            valueFrom:
+              configMapKeyRef:
+                name: dbconfig
+                key: MYSQL_USER
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: dbconfig
+                key: MYSQL_PASSWORD
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: dbconfig
+                key: MYSQL_DATABASE
