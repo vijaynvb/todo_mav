@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: my-network-policy
+  namespace: ns-dest
+spec:
+  podSelector:
+    matchLabels: 
+      app: dest-app
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelecttor:
+        matchLabels:
+          app: source
+      podSelector:
+        matchLabels:
+          app: source-app
+    ports:
+    - protocol: TCP
+      port: 80
