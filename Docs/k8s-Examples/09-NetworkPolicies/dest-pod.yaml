@@ -4,7 +4,7 @@ metadata:
   labels:
     app: dest-app
   name: dest-app
-  namespace: ns-source
+  namespace: ns-dest
 spec:
   containers:
   - image: nginx
