@@ -304,3 +304,30 @@ GKE - Resource Quota NS
     kubectl describe ns rq 
 
 GKE - Limit Range -> Pod or Container or Volume
+
+GKE - Network Policies
+
+    kubectl create ns ns-source
+    kubectl create ns ns-dest
+    kubectl apply -f dest-pod.yaml,source-pod.yaml
+    kubectl get pods -n ns-source,ns-dest -o wide
+    kubectl exec -it -n ns-source source-pod sh 
+        curl <ip ns-dest>
+    kubectl apply -f deny-all-np.yaml
+    kubectl exec -it -n ns-source source-pod sh 
+        curl <ip ns-dest>
+    kubectl label ns ns-source app=source
+    kubectl apply -f app-np.yaml
+    kubectl exec -it -n ns-source source-pod sh 
+        curl <ip ns-dest>
+    kubectl run testing --image nginx -it --rm sh 
+        curl <ip ns-dest>
+
+GKE- Sample Application: 
+
+    kubectl apply -f Example-Application.yaml
+    kubectl get all -n todoapp
+    kubectl get nodes
+    kubectl label node <any one node name> gpu=nvidia
+    kubectl get all -n todoapp
+    kubectl delete -f Example-Application.yaml
